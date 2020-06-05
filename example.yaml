@@ -7,16 +7,16 @@ metadata:
     route.istio-api-gateway.knative.dev/default-strip: "true"
 spec:
   hosts:
-  - api.d.nexon.io
+  - api.example.io
   gateways:
   - web-api-gateway
   http:
   - name: no-auth-path-legacy
     match:
     - uri:
-        prefix: /api/geoip-api/v1/auth-not-required
+        prefix: /api/awesome/v1/login
     rewrite: 
-      uri: /geoip-api/v1
+      uri: /awesome-api/v1
     route:
     - destination: 
         host: some-api.legacy.io #! knative service host
@@ -24,7 +24,7 @@ spec:
   - name: auth-path-with-knative
     match:
     - uri:
-        prefix: /api/geoip-api/v1/
+        prefix: /api/awesome/v1/login-check
     rewrite: 
-      uri: /geoip-api/v1
-    knative-serving-route: geoip-api.common
+      uri: /awosome-api/v1
+    knative-serving-route: awesome-api.default

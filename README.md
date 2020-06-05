@@ -1,14 +1,10 @@
-# Knative Sample Controller
+# Istio API Gateway for Knative
 
-[![GoDoc](https://godoc.org/knative.dev/sample-controller?status.svg)](https://godoc.org/knative.dev/sample-controller)
-[![Go Report Card](https://goreportcard.com/badge/knative/sample-controller)](https://goreportcard.com/report/knative/sample-controller)
+This project aims to provide a way to map URL paths defined by users to Knative Services, when using Istio ingress.
 
-Knative `sample-controller` defines a few simple resources that are validated by
-webhook and managed by a controller to demonstrate the canonical style in which
-Knative writes controllers.
+Basically, combination of the conventional API gateway and Istio ingress is one way to achieve this purpose, 
+but it requires one more network hop.
+Therefore, this project provides more concise way to directly deliver a traffic coming with a URL path defined by users to 
+Knative Services over Istio.
 
-To learn more about Knative, please visit our
-[Knative docs](https://github.com/knative/docs) repository.
-
-If you are interested in contributing, see [CONTRIBUTING.md](./CONTRIBUTING.md)
-and [DEVELOPMENT.md](./DEVELOPMENT.md).
+Currently, this is on developing.
