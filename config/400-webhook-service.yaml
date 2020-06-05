@@ -17,9 +17,9 @@ kind: Service
 metadata:
   labels:
     role: webhook
-    samples.knative.dev/release: devel
+    istio-api-gateway.knative.dev/release: devel
   name: webhook
-  namespace: knative-samples
+  namespace: istio-api-gateway
 spec:
   ports:
     - port: 443

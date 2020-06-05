@@ -16,9 +16,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: controller
-  namespace: knative-samples
+  namespace: istio-api-gateway
   labels:
-    samples.knative.dev/release: devel
+    istio-api-gateway.knative.dev/release: devel
 spec:
   replicas: 1
   selector:
@@ -30,14 +30,14 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: controller
-        samples.knative.dev/release: devel
+        istio-api-gateway.knative.dev/release: devel
     spec:
       serviceAccountName: controller
       containers:
       - name: controller
         # This is the Go import path for the binary that is containerized
         # and substituted here.
-        image: ko://knative.dev/sample-controller/cmd/controller
+        image: ko://knative.dev/net-istio-api-gateway/cmd/controller
         resources:
           # Request 2x what we saw running e2e
           requests:
@@ -63,7 +63,7 @@ spec:
         - name: CONFIG_OBSERVABILITY_NAME
           value: config-observability
         - name: METRICS_DOMAIN
-          value: knative.dev/samples
+          value: knative.dev/istio-api-gateway
       volumes:
         - name: config-logging
           configMap:

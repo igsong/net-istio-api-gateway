@@ -1,7 +1,30 @@
-apiVersion: samples.knative.dev/v1alpha1
-kind: AddressableService
-metadata:
-  name: make-it-addressable
-  namespace: knative-samples
+apiVersion: istio-api-gateway.knative.dev/v1alpha1
+kind: Route
+metadata: 
+  name: geoip-api
+  namespace: istio-api-gateway
+  annotations:
+    route.istio-api-gateway.knative.dev/default-strip: "true"
 spec:
-  serviceName: webhook
+  hosts:
+  - api.d.nexon.io
+  gateways:
+  - web-api-gateway
+  http:
+  - name: no-auth-path-legacy
+    match:
+    - uri:
+        prefix: /api/geoip-api/v1/auth-not-required
+    rewrite: 
+      uri: /geoip-api/v1
+    route:
+    - destination: 
+        host: some-api.legacy.io #! knative service host
+    bypass-auth: false #! default is true
+  - name: auth-path-with-knative
+    match:
+    - uri:
+        prefix: /api/geoip-api/v1/
+    rewrite: 
+      uri: /geoip-api/v1
+    knative-serving-route: geoip-api.common

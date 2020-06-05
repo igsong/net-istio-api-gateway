@@ -16,9 +16,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webhook
-  namespace: knative-samples
+  namespace: istio-api-gateway
   labels:
-    samples.knative.dev/release: devel
+    istio-api-gateway.knative.dev/release: devel
 spec:
   replicas: 1
   selector:
@@ -32,14 +32,14 @@ spec:
       labels:
         app: webhook
         role: webhook
-        samples.knative.dev/release: devel
+        istio-api-gateway.knative.dev/release: devel
     spec:
       serviceAccountName: controller
       containers:
       - name: webhook
         # This is the Go import path for the binary that is containerized
         # and substituted here.
-        image: ko://knative.dev/sample-controller/cmd/webhook
+        image: ko://knative.dev/net-istio-api-gateway/cmd/webhook
         resources:
           # Request 2x what we saw running e2e
           requests:
@@ -57,6 +57,6 @@ spec:
         - name: CONFIG_LOGGING_NAME
           value: config-logging
         - name: METRICS_DOMAIN
-          value: knative.dev/samples
+          value: knative.dev/istio-api-gateway
         - name: WEBHOOK_NAME
           value: webhook
