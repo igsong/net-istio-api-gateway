@@ -31,15 +31,15 @@ KNATIVE_CODEGEN_PKG=${KNATIVE_CODEGEN_PKG:-$(cd ${REPO_ROOT}; ls -d -1 ./vendor/
 #                  instead of the $GOPATH directly. For normal projects this can be dropped.
 chmod +x ${CODEGEN_PKG}/generate-groups.sh
 ${CODEGEN_PKG}/generate-groups.sh "deepcopy,client,informer,lister" \
-  knative.dev/sample-controller/pkg/client knative.dev/sample-controller/pkg/apis \
-  "samples:v1alpha1" \
+  knative.dev/net-istio-api-gateway/pkg/client knative.dev/net-istio-api-gateway/pkg/apis \
+  "istioapigateway:v1alpha1" \
   --go-header-file ${REPO_ROOT}/hack/boilerplate/boilerplate.go.txt
 
 # Knative Injection
 chmod +x ${KNATIVE_CODEGEN_PKG}/hack/generate-knative.sh
 ${KNATIVE_CODEGEN_PKG}/hack/generate-knative.sh "injection" \
-  knative.dev/sample-controller/pkg/client knative.dev/sample-controller/pkg/apis \
-  "samples:v1alpha1" \
+  knative.dev/net-istio-api-gateway/pkg/client knative.dev/net-istio-api-gateway/pkg/apis \
+  "istioapigateway:v1alpha1" \
   --go-header-file ${REPO_ROOT}/hack/boilerplate/boilerplate.go.txt
 
 # Make sure our dependencies are up-to-date

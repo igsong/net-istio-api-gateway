@@ -1,10 +1,10 @@
-apiVersion: istio-api-gateway.knative.dev/v1alpha1
+apiVersion: istioapigateway.knative.dev/v1alpha1
 kind: Route
 metadata: 
   name: geoip-api
   namespace: istio-api-gateway
   annotations:
-    route.istio-api-gateway.knative.dev/default-strip: "true"
+    route.istioapigateway.knative.dev/default-strip: "true"
 spec:
   hosts:
   - api.example.io

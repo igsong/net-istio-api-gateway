@@ -24,9 +24,9 @@ import (
 	"k8s.io/client-go/discovery"
 	fakediscovery "k8s.io/client-go/discovery/fake"
 	"k8s.io/client-go/testing"
-	clientset "knative.dev/sample-controller/pkg/client/clientset/versioned"
-	samplesv1alpha1 "knative.dev/sample-controller/pkg/client/clientset/versioned/typed/samples/v1alpha1"
-	fakesamplesv1alpha1 "knative.dev/sample-controller/pkg/client/clientset/versioned/typed/samples/v1alpha1/fake"
+	clientset "knative.dev/net-istio-api-gateway/pkg/client/clientset/versioned"
+	istioapigatewayv1alpha1 "knative.dev/net-istio-api-gateway/pkg/client/clientset/versioned/typed/istioapigateway/v1alpha1"
+	fakeistioapigatewayv1alpha1 "knative.dev/net-istio-api-gateway/pkg/client/clientset/versioned/typed/istioapigateway/v1alpha1/fake"
 )
 
 // NewSimpleClientset returns a clientset that will respond with the provided objects.
@@ -76,7 +76,7 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
-// SamplesV1alpha1 retrieves the SamplesV1alpha1Client
-func (c *Clientset) SamplesV1alpha1() samplesv1alpha1.SamplesV1alpha1Interface {
-	return &fakesamplesv1alpha1.FakeSamplesV1alpha1{Fake: &c.Fake}
+// IstioapigatewayV1alpha1 retrieves the IstioapigatewayV1alpha1Client
+func (c *Clientset) IstioapigatewayV1alpha1() istioapigatewayv1alpha1.IstioapigatewayV1alpha1Interface {
+	return &fakeistioapigatewayv1alpha1.FakeIstioapigatewayV1alpha1{Fake: &c.Fake}
 }

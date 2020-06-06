@@ -17,7 +17,7 @@ kind: ClusterRoleBinding
 metadata:
   name: istio-api-gateway-controller-admin
   labels:
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
 subjects:
   - kind: ServiceAccount
     name: controller

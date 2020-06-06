@@ -18,7 +18,7 @@ metadata:
   name: controller
   namespace: istio-api-gateway
   labels:
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
 spec:
   replicas: 1
   selector:
@@ -30,7 +30,7 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: controller
-        istio-api-gateway.knative.dev/release: devel
+        istioapigateway.knative.dev/release: devel
     spec:
       serviceAccountName: controller
       containers:

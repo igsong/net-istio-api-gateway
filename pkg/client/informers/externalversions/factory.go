@@ -27,9 +27,9 @@ import (
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
-	versioned "knative.dev/sample-controller/pkg/client/clientset/versioned"
-	internalinterfaces "knative.dev/sample-controller/pkg/client/informers/externalversions/internalinterfaces"
-	samples "knative.dev/sample-controller/pkg/client/informers/externalversions/samples"
+	versioned "knative.dev/net-istio-api-gateway/pkg/client/clientset/versioned"
+	internalinterfaces "knative.dev/net-istio-api-gateway/pkg/client/informers/externalversions/internalinterfaces"
+	istioapigateway "knative.dev/net-istio-api-gateway/pkg/client/informers/externalversions/istioapigateway"
 )
 
 // SharedInformerOption defines the functional option type for SharedInformerFactory.
@@ -172,9 +172,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Samples() samples.Interface
+	Istioapigateway() istioapigateway.Interface
 }
 
-func (f *sharedInformerFactory) Samples() samples.Interface {
-	return samples.New(f, f.namespace, f.tweakListOptions)
+func (f *sharedInformerFactory) Istioapigateway() istioapigateway.Interface {
+	return istioapigateway.New(f, f.namespace, f.tweakListOptions)
 }

@@ -17,7 +17,7 @@ kind: Service
 metadata:
   labels:
     role: webhook
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
   name: webhook
   namespace: istio-api-gateway
 spec:

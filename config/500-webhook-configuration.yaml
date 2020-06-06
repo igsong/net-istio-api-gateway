@@ -15,9 +15,9 @@
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: defaulting.webhook.istio-api-gateway.knative.dev
+  name: defaulting.webhook.istioapigateway.knative.dev
   labels:
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
 webhooks:
 - admissionReviewVersions:
   - v1beta1
@@ -26,14 +26,14 @@ webhooks:
       name: webhook
       namespace: istio-api-gateway
   failurePolicy: Fail
-  name: defaulting.webhook.istio-api-gateway.knative.dev
+  name: defaulting.webhook.istioapigateway.knative.dev
 ---
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: validation.webhook.istio-api-gateway.knative.dev
+  name: validation.webhook.istioapigateway.knative.dev
   labels:
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
 webhooks:
 - admissionReviewVersions:
   - v1beta1
@@ -42,14 +42,14 @@ webhooks:
       name: webhook
       namespace: istio-api-gateway
   failurePolicy: Fail
-  name: validation.webhook.istio-api-gateway.knative.dev
+  name: validation.webhook.istioapigateway.knative.dev
 ---
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: config.webhook.istio-api-gateway.knative.dev
+  name: config.webhook.istioapigateway.knative.dev
   labels:
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
 webhooks:
 - admissionReviewVersions:
   - v1beta1
@@ -58,10 +58,10 @@ webhooks:
       name: webhook
       namespace: istio-api-gateway
   failurePolicy: Fail
-  name: config.webhook.istio-api-gateway.knative.dev
+  name: config.webhook.istioapigateway.knative.dev
   namespaceSelector:
     matchExpressions:
-    - key: istio-api-gateway.knative.dev/release
+    - key: istioapigateway.knative.dev/release
       operator: Exists
 ---
 apiVersion: v1
@@ -70,5 +70,5 @@ metadata:
   name: webhook-certs
   namespace: istio-api-gateway
   labels:
-    istio-api-gateway.knative.dev/release: devel
+    istioapigateway.knative.dev/release: devel
 # The data is populated at install time.
