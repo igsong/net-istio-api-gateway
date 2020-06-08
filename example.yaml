@@ -27,4 +27,6 @@ spec:
         prefix: /api/awesome/v1/login-check
     rewrite: 
       uri: /awosome-api/v1
-    knative-serving-route: awesome-api.default
+    knative-serving-route: 
+      name: awesome-api
+      namespace: default

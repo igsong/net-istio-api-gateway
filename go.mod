@@ -3,8 +3,11 @@ module knative.dev/net-istio-api-gateway
 go 1.14
 
 require (
+	contrib.go.opencensus.io/exporter/stackdriver v0.13.1 // indirect
 	github.com/google/licenseclassifier v0.0.0-20200402202327-879cb1424de0
+	github.com/grpc-ecosystem/grpc-gateway v1.12.2 // indirect
 	go.uber.org/zap v1.14.1
+	gomodules.xyz/jsonpatch/v2 v2.1.0 // indirect
 	k8s.io/api v0.17.6
 	k8s.io/apimachinery v0.17.6
 	k8s.io/client-go v11.0.1-0.20190805182717-6502b5e7b1b5+incompatible

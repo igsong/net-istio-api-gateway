@@ -20,12 +20,10 @@ import (
 	"context"
 
 	corev1 "k8s.io/api/core/v1"
-	apierrs "k8s.io/apimachinery/pkg/api/errors"
 	corev1listers "k8s.io/client-go/listers/core/v1"
 
 	istioapigatewayv1alpha1 "knative.dev/net-istio-api-gateway/pkg/apis/istioapigateway/v1alpha1"
 	routereconciler "knative.dev/net-istio-api-gateway/pkg/client/injection/reconciler/istioapigateway/v1alpha1/route"
-	"knative.dev/pkg/logging"
 	"knative.dev/pkg/reconciler"
 	"knative.dev/pkg/tracker"
 )
@@ -59,43 +57,43 @@ func (r *Reconciler) ReconcileKind(ctx context.Context, o *istioapigatewayv1alph
 	}
 	o.Status.InitializeConditions()
 
-	if err := r.reconcileForService(ctx, o); err != nil {
-		return err
-	}
+	// if err := r.reconcileForService(ctx, o); err != nil {
+	// 	return err
+	// }
 
 	o.Status.ObservedGeneration = o.Generation
 	return newReconciledNormal(o.Namespace, o.Name)
 }
 
-func (r *Reconciler) reconcileForService(ctx context.Context, route *istioapigatewayv1alpha1.Route) error {
-	logger := logging.FromContext(ctx)
+// func (r *Reconciler) reconcileForService(ctx context.Context, route *istioapigatewayv1alpha1.Route) error {
+// 	logger := logging.FromContext(ctx)
 
-	if err := r.Tracker.TrackReference(tracker.Reference{
-		APIVersion: "v1",
-		Kind:       "Service",
-		Name:       route.Spec.ServiceName,
-		Namespace:  route.Namespace,
-	}, route); err != nil {
-		logger.Errorf("Error tracking service %s: %v", route.Spec.ServiceName, err)
-		return err
-	}
+// 	if err := r.Tracker.TrackReference(tracker.Reference{
+// 		APIVersion: "v1",
+// 		Kind:       "Service",
+// 		Name:       route.Spec.ServiceName,
+// 		Namespace:  route.Namespace,
+// 	}, route); err != nil {
+// 		logger.Errorf("Error tracking service %s: %v", route.Spec.ServiceName, err)
+// 		return err
+// 	}
 
-	_, err := r.ServiceLister.Services(route.Namespace).Get(route.Spec.ServiceName)
-	if apierrs.IsNotFound(err) {
-		logger.Info("Service does not yet exist:", route.Spec.ServiceName)
-		route.Status.MarkServiceUnavailable(route.Spec.ServiceName)
-		return nil
-	} else if err != nil {
-		logger.Errorf("Error reconciling service %s: %v", route.Spec.ServiceName, err)
-		return err
-	}
+// 	_, err := r.ServiceLister.Services(route.Namespace).Get(route.Spec.ServiceName)
+// 	if apierrs.IsNotFound(err) {
+// 		logger.Info("Service does not yet exist:", route.Spec.ServiceName)
+// 		route.Status.MarkServiceUnavailable(route.Spec.ServiceName)
+// 		return nil
+// 	} else if err != nil {
+// 		logger.Errorf("Error reconciling service %s: %v", route.Spec.ServiceName, err)
+// 		return err
+// 	}
 
-	route.Status.MarkServiceAvailable()
-	// route.Status.Address = &duckv1.Addressable{
-	// 	URL: &apis.URL{
-	// 		Scheme: "http",
-	// 		Host:   network.GetServiceHostname(route.Spec.ServiceName, route.Namespace),
-	// 	},
-	// }
-	return nil
-}
+// 	route.Status.MarkServiceAvailable()
+// 	// route.Status.Address = &duckv1.Addressable{
+// 	// 	URL: &apis.URL{
+// 	// 		Scheme: "http",
+// 	// 		Host:   network.GetServiceHostname(route.Spec.ServiceName, route.Namespace),
+// 	// 	},
+// 	// }
+// 	return nil
+// }
